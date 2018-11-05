@@ -24,7 +24,34 @@ public class TelaConsultarDepartamento extends JPanel {
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
+		JLabel lblCodigoDoDepartamento = new JLabel("Insira o código do departamento");
+		lblCodigoDoDepartamento.setBounds(125, 125, 183, 16);
+		panel.add(lblCodigoDoDepartamento);
+		
+		JLabel lblNome = new JLabel("Nome: ");
+		lblNome.setBounds(70, 40, 200, 16);
+		panel.add(lblNome);
+		
+		JLabel lblSigla = new JLabel("Sigla: ");
+		lblSigla.setBounds(70, 80, 200, 16);
+		panel.add(lblSigla);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(155, 150, 120, 20);
+		panel.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
 		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Departamento dpmt = DepartamentoDAO.pesquisa(Integer.parseInt(txtCodigo.getText()));
+				
+				lblNome.setText("Nome: " + dpmt.getNome());
+				lblSigla.setText("Sigla: " + dpmt.getSigla());
+				
+			}
+		});
 		btnConsultar.setBounds(165, 180, 100, 25);
 		panel.add(btnConsultar);
 		
@@ -32,22 +59,12 @@ public class TelaConsultarDepartamento extends JPanel {
 		btnVoltar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				cadDep.getFrame().add(new TelaInicial(cadDep), BorderLayout.CENTER);
+				cadDep.getFrame().getContentPane().add(new TelaInicial(cadDep), BorderLayout.CENTER);
 				remove(panel);
 				cadDep.getFrame().setVisible(true);
 			}
 		});
 		btnVoltar.setBounds(165, 215, 100, 25);
 		panel.add(btnVoltar);
-		
-		txtCodigo = new JTextField();
-		txtCodigo.setBounds(155, 150, 120, 20);
-		panel.add(txtCodigo);
-		txtCodigo.setColumns(10);
-		
-		JLabel lblCodigoDoDepartamento = new JLabel("Insira o código do departamento");
-		lblCodigoDoDepartamento.setBounds(125, 125, 183, 16);
-		panel.add(lblCodigoDoDepartamento);
-
 	}
 }

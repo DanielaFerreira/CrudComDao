@@ -24,6 +24,15 @@ public class TelaExcluirDepartamento extends JPanel {
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
+		JLabel lblCodigoDoDepartamento = new JLabel("Insira o código do departamento");
+		lblCodigoDoDepartamento.setBounds(125, 125, 183, 16);
+		panel.add(lblCodigoDoDepartamento);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(155, 150, 120, 20);
+		panel.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
 		JButton btnConsultar = new JButton("Procurar");
 		btnConsultar.setBounds(165, 180, 100, 25);
 		panel.add(btnConsultar);
@@ -39,15 +48,6 @@ public class TelaExcluirDepartamento extends JPanel {
 		});
 		btnVoltar.setBounds(165, 215, 100, 25);
 		panel.add(btnVoltar);
-
-		txtCodigo = new JTextField();
-		txtCodigo.setBounds(155, 150, 120, 20);
-		panel.add(txtCodigo);
-		txtCodigo.setColumns(10);
-
-		JLabel lblCodigoDoDepartamento = new JLabel("Insira o código do departamento");
-		lblCodigoDoDepartamento.setBounds(125, 125, 183, 16);
-		panel.add(lblCodigoDoDepartamento);
 	}
 
 }

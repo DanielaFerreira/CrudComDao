@@ -1,5 +1,7 @@
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -33,22 +35,6 @@ public class TelaNovoDepartamento extends JPanel {
 		add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				cadDep.getFrame().add(new TelaInicial(cadDep), BorderLayout.CENTER);
-				remove(panel);
-				cadDep.getFrame().setVisible(true);
-			}
-		});
-		btnVoltar.setBounds(105, 200, 90, 25);
-		panel.add(btnVoltar);
-		
-		JButton btnConcluir = new JButton("Concluir");
-		btnConcluir.setBounds(250, 200, 90, 25);
-		panel.add(btnConcluir);
-		
 		JLabel lblNomeDoDepatamento = new JLabel("Nome do Depatamento");
 		lblNomeDoDepatamento.setBounds(95, 30, 150, 15);
 		panel.add(lblNomeDoDepatamento);
@@ -75,6 +61,40 @@ public class TelaNovoDepartamento extends JPanel {
 		txtCdigo.setBounds(265, 130, 100, 20);
 		panel.add(txtCdigo);
 		txtCdigo.setColumns(10);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				cadDep.getFrame().getContentPane().add(new TelaInicial(cadDep), BorderLayout.CENTER);
+				remove(panel);
+				cadDep.getFrame().setVisible(true);
+			}
+		});
+		btnVoltar.setBounds(105, 200, 90, 25);
+		panel.add(btnVoltar);
+		
+		JButton btnConcluir = new JButton("Concluir");
+		btnConcluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Departamento dpmt = new Departamento();
+				
+				if (!txtCdigo.getText().equals("") || !txtNome.getText().equals("") || !txtSigla.getText().equals("")) {
+					dpmt.setCodigo(Integer.parseInt(txtCdigo.getText()));
+					dpmt.setNome(txtNome.getText());
+					dpmt.setSigla(txtSigla.getText());
+				} else {
+					JOptionPane.showMessageDialog(panel, "Preencha todos os campos!", "Waring", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+				
+				
+				DepartamentoDAO.adicionar(dpmt);
+			}
+		});
+		btnConcluir.setBounds(250, 200, 90, 25);
+		panel.add(btnConcluir);
 		
 	}
 
